@@ -120,7 +120,7 @@ myenv\Scripts\activate.bat
 pip install -r requirements.txt
 ```
 
-## 1.2.4 Run on Local Server
+#### 1.2.4 Run on Local Server
 
 Run inside the directory containing `manage.py` file:
 
@@ -128,7 +128,7 @@ Run inside the directory containing `manage.py` file:
 python manage.py runserver
 ```
 
-## 1.2.5 Run the migrations
+#### 1.2.5 Run the migrations
 
 Prepare:
 
@@ -144,6 +144,7 @@ python manage.py migrate
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+---
 
 ### 1.3 Database Design
 
@@ -157,93 +158,93 @@ python manage.py migrate
 
 #### 1.4.1 Profile Model
 
-| Field            | Parameters                                    | Type          |
-|------------------|-----------------------------------------------|---------------|
-| user             | on_delete=models.CASCADE, null=True, blank=True | OneToOneField |
-| name             | max_length=200, blank=True, null=True         | CharField     |
-| email            | max_length=500, blank=True, null=True         | EmailField    |
-| username         | max_length=200, blank=True, null=True         | CharField     |
-| location         | max_length=200, blank=True, null=True         | CharField     |
-| short_intro      | max_length=200, blank=True, null=True         | CharField     |
-| bio              | blank=True, null=True                         | TextField     |
-| profile_image    | null=True, blank=True, upload_to="profiles/", default="profiles/user-default.png" | ImageField |
-| social_portfolio | max_length=200, blank=True, null=True         | CharField     |
-| social_twitter   | max_length=200, blank=True, null=True         | CharField     |
-| social_linkedin  | max_length=200, blank=True, null=True         | CharField     |
-| social_website   | max_length=200, blank=True, null=True         | CharField     |
-| created          | auto_now_add=True                             | DateTimeField |
-| id               | default=uuid.uuid4, unique=True, primary_key=True, editable=False | UUIDField |
+| Field            | Parameters                                                                        | Type          |
+| ---------------- | --------------------------------------------------------------------------------- | ------------- |
+| user             | on_delete=models.CASCADE, null=True, blank=True                                   | OneToOneField |
+| name             | max_length=200, blank=True, null=True                                             | CharField     |
+| email            | max_length=500, blank=True, null=True                                             | EmailField    |
+| username         | max_length=200, blank=True, null=True                                             | CharField     |
+| location         | max_length=200, blank=True, null=True                                             | CharField     |
+| short_intro      | max_length=200, blank=True, null=True                                             | CharField     |
+| bio              | blank=True, null=True                                                             | TextField     |
+| profile_image    | null=True, blank=True, upload_to="profiles/", default="profiles/user-default.png" | ImageField    |
+| social_portfolio | max_length=200, blank=True, null=True                                             | CharField     |
+| social_twitter   | max_length=200, blank=True, null=True                                             | CharField     |
+| social_linkedin  | max_length=200, blank=True, null=True                                             | CharField     |
+| social_website   | max_length=200, blank=True, null=True                                             | CharField     |
+| created          | auto_now_add=True                                                                 | DateTimeField |
+| id               | default=uuid.uuid4, unique=True, primary_key=True, editable=False                 | UUIDField     |
 
 ---
  
 #### 1.4.2 Skill Model
 
-| Field       | Parameters                                    | Type          |
-|-------------|-----------------------------------------------|---------------|
-| owner       | on_delete=models.CASCADE, null=True, blank=True | ForeignKey    |
-| name        | max_length=200, blank=True, null=True         | CharField     |
-| description | blank=True, null=True                         | TextField     |
-| created     | auto_now_add=True                             | DateTimeField |
-| id          | default=uuid.uuid4, unique=True, primary_key=True, editable=False | UUIDField |
+| Field       | Parameters                                                        | Type          |
+| ----------- | ----------------------------------------------------------------- | ------------- |
+| owner       | on_delete=models.CASCADE, null=True, blank=True                   | ForeignKey    |
+| name        | max_length=200, blank=True, null=True                             | CharField     |
+| description | blank=True, null=True                                             | TextField     |
+| created     | auto_now_add=True                                                 | DateTimeField |
+| id          | default=uuid.uuid4, unique=True, primary_key=True, editable=False | UUIDField     |
 
 ---
  
 #### 1.4.3 Message Model
 
-| Field      | Parameters                                           | Type          |
-|------------|------------------------------------------------------|---------------|
-| sender     | on_delete=models.SET_NULL, null=True, blank=True      | ForeignKey    |
-| recipient  | on_delete=models.SET_NULL, null=True, blank=True, related_name="messages" | ForeignKey |
-| name       | max_length=200, null=True, blank=True                | CharField     |
-| email      | max_length=200, null=True, blank=True                | EmailField    |
-| subject    | max_length=200, null=True, blank=True                | CharField     |
-| body       |                                                      | TextField     |
-| is_read    | default=False, null=True                             | BooleanField  |
-| created    | auto_now_add=True                                    | DateTimeField |
-| id         | default=uuid.uuid4, unique=True, primary_key=True, editable=False | UUIDField |
+| Field     | Parameters                                                                | Type          |
+| --------- | ------------------------------------------------------------------------- | ------------- |
+| sender    | on_delete=models.SET_NULL, null=True, blank=True                          | ForeignKey    |
+| recipient | on_delete=models.SET_NULL, null=True, blank=True, related_name="messages" | ForeignKey    |
+| name      | max_length=200, null=True, blank=True                                     | CharField     |
+| email     | max_length=200, null=True, blank=True                                     | EmailField    |
+| subject   | max_length=200, null=True, blank=True                                     | CharField     |
+| body      |                                                                           | TextField     |
+| is_read   | default=False, null=True                                                  | BooleanField  |
+| created   | auto_now_add=True                                                         | DateTimeField |
+| id        | default=uuid.uuid4, unique=True, primary_key=True, editable=False         | UUIDField     |
 
 ---
 
 #### 1.4.4 Artwork Model
 
-| Field          | Parameters                                     | Type            |
-|----------------|------------------------------------------------|-----------------|
-| owner          | on_delete=models.SET_NULL, null=True, blank=True | ForeignKey      |
-| title          | max_length=200                                 | CharField       |
-| description    | null=True, blank=True                          | TextField       |
-| featured_image | null=True, blank=True, default="default.jpg"    | ImageField      |
-| demo_link      | max_length=2000, null=True, blank=True          | CharField       |
-| source_link    | max_length=2000, null=True, blank=True          | CharField       |
-| tags           | blank=True                                     | ManyToManyField |
-| vote_total     | default=0, null=True, blank=True                | IntegerField    |
-| vote_ratio     | default=0, null=True, blank=True                | IntegerField    |
-| created        | auto_now_add=True                              | DateTimeField   |
-| id             | default=uuid.uuid4, unique=True, primary_key=True, editable=False | UUIDField |
+| Field          | Parameters                                                        | Type            |
+| -------------- | ----------------------------------------------------------------- | --------------- |
+| owner          | on_delete=models.SET_NULL, null=True, blank=True                  | ForeignKey      |
+| title          | max_length=200                                                    | CharField       |
+| description    | null=True, blank=True                                             | TextField       |
+| featured_image | null=True, blank=True, default="default.jpg"                      | ImageField      |
+| demo_link      | max_length=2000, null=True, blank=True                            | CharField       |
+| source_link    | max_length=2000, null=True, blank=True                            | CharField       |
+| tags           | blank=True                                                        | ManyToManyField |
+| vote_total     | default=0, null=True, blank=True                                  | IntegerField    |
+| vote_ratio     | default=0, null=True, blank=True                                  | IntegerField    |
+| created        | auto_now_add=True                                                 | DateTimeField   |
+| id             | default=uuid.uuid4, unique=True, primary_key=True, editable=False | UUIDField       |
 
 
 ---
 
 #### 1.4.5 Review Model
 
-| Field    | Parameters                           | Type         |
-|----------|--------------------------------------|--------------|
-| owner    | on_delete=models.CASCADE, null=True  | ForeignKey   |
-| artwork  | on_delete=models.CASCADE             | ForeignKey   |
-| body     | null=True, blank=True                | TextField    |
-| value    | max_length=200, choices=VOTE_TYPE     | CharField    |
-| created  | auto_now_add=True                    | DateTimeField|
-| id       | default=uuid.uuid4, unique=True, primary_key=True, editable=False | UUIDField |
+| Field   | Parameters                                                        | Type          |
+| ------- | ----------------------------------------------------------------- | ------------- |
+| owner   | on_delete=models.CASCADE, null=True                               | ForeignKey    |
+| artwork | on_delete=models.CASCADE                                          | ForeignKey    |
+| body    | null=True, blank=True                                             | TextField     |
+| value   | max_length=200, choices=VOTE_TYPE                                 | CharField     |
+| created | auto_now_add=True                                                 | DateTimeField |
+| id      | default=uuid.uuid4, unique=True, primary_key=True, editable=False | UUIDField     |
 
 
 ---
 
 #### 1.4.6 Tag Model
 
-| Field   | Parameters             | Type          |
-|---------|------------------------|--------------|
-| name    | max_length=200         | CharField    |
-| created | auto_now_add=True      | DateTimeField|
-| id      | default=uuid.uuid4, unique=True, primary_key=True, editable=False | UUIDField |
+| Field   | Parameters                                                        | Type          |
+| ------- | ----------------------------------------------------------------- | ------------- |
+| name    | max_length=200                                                    | CharField     |
+| created | auto_now_add=True                                                 | DateTimeField |
+| id      | default=uuid.uuid4, unique=True, primary_key=True, editable=False | UUIDField     |
 
 
 ---
